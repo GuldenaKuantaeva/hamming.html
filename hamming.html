@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hamming code</title>
+        <script>
+            function code() {
+            let message = document.getElementById('inputData').value;
+            let inputDigits = message.split('');
+            for (let i = 0; i < inputDigits.length; i++) {
+                inputDigits[i] = inputDigits[i] * 1;
+            }
+            inputDigits.push((inputDigits[0] + inputDigits[2] + inputDigits[3]) % 2);
+            inputDigits.push((inputDigits[0] + inputDigits[1] + inputDigits[3]) % 2);
+            inputDigits.push((inputDigits[1] + inputDigits[2] + inputDigits[3]) % 2);
+            document.getElementById('codedData').value = inputDigits.join('');
+        }
+
+
+        function decode() {
+            let arr = [];
+            let code = document.getElementById("codedData").value;
+            let inputDigitsDecode = code.split('');
+            for (let i = 0; i < inputDigitsDecode.length; i++) {
+                inputDigitsDecode[i] = inputDigitsDecode[i] * 1;
+                arr[i] = inputDigitsDecode[i];
+            }
+            let inputDigits1 = ((inputDigitsDecode[0] + inputDigitsDecode[2] + inputDigitsDecode[3] + inputDigitsDecode[4]) % 2);
+            let inputDigits2 = ((inputDigitsDecode[0] + inputDigitsDecode[1] + inputDigitsDecode[3] + inputDigitsDecode[5]) % 2);
+            let inputDigits3 = ((inputDigitsDecode[1] + inputDigitsDecode[2] + inputDigitsDecode[3] + inputDigitsDecode[6]) % 2);
+            if (inputDigits1) {
+                if (!(inputDigits2) && inputDigits1)
+                    inputDigitsDecode[0] = 1 - inputDigitsDecode[0];
+                else if (!(inputDigits3) && inputDigits2)
+                    inputDigitsDecode[2] = 1 - inputDigitsDecode[2];
+                else
+                    inputDigitsDecode[4] = 1 - inputDigitsDecode[4];
+            } else if (inputDigits2) {
+                if (!(inputDigits3) && inputDigits1)
+                    inputDigitsDecode[0] = 1 - inputDigitsDecode[0];
+                else if (!(inputDigits1) && inputDigits3)
+                    inputDigitsDecode[1] = 1 - inputDigitsDecode[1];
+                else
+                    inputDigitsDecode[5] = 1 - inputDigitsDecode[5];
+            } else if (inputDigits3) {
+                if (!(inputDigits2) && inputDigits1)
+                    inputDigitsDecode[2] = 1 - inputDigitsDecode[2];
+                else if (!(inputDigits1) && inputDigits2)
+                    inputDigitsDecode[1] = 1 - inputDigitsDecode[1];
+                else
+                    inputDigitsDecode[6] = 1 - inputDigitsDecode[6];
+            } else
+                alert("Mistakes not found");
+            for (let i = 0; i < inputDigitsDecode.length; i++) {
+                if (inputDigitsDecode[i] != arr[i]) {
+                    i++;
+                    alert("There was mistake in " + i + " " + 'element');
+                    break
+                }
+            }
+            document.getElementById('decodedData').value = inputDigitsDecode.join('');
+        }
+
+
+        </script >
+
+    </head>
+        
+       <body>
+        <p>Hamming code</p>
+        <p><input type='text' id='inputData'/> input data</p>
+        <p><input type='button' onclick='code()' value='Code'/></p>
+        <p><input type='text' id="codedData"/> coded data</p>
+        <p><input type='button' onclick='decode()' value='Decode'/></p>
+        <p><input type='text' id="decodedData"/> decoded data</p>
+
+       </body>
+</html>>      
+
+       
