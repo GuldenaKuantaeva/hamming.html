@@ -20,7 +20,8 @@
             let arr = [];
             let code = document.getElementById("codedData").value;
             let inputDigitsDecode = code.split('');
-            for (let i = 0; i < inputDigitsDecode.length; i++) {
+            let i=0
+            for (i = 0; i < inputDigitsDecode.length; i++) {
                 inputDigitsDecode[i] = inputDigitsDecode[i] * 1;
                 arr[i] = inputDigitsDecode[i];
             }
@@ -50,7 +51,7 @@
                     inputDigitsDecode[6] = 1 - inputDigitsDecode[6];
             } else
                 alert("Mistakes not found");
-            for (let i = 0; i < inputDigitsDecode.length; i++) {
+            for (i = 0; i < inputDigitsDecode.length; i++) {
                 if (inputDigitsDecode[i] != arr[i]) {
                     i++;
                     alert("There was mistake in " + i + " " + 'element');
@@ -69,7 +70,7 @@
         <p>Hamming code</p>
         <p><input type='text' id='inputData'/> input data</p>
         <p><input type='button' onclick='code()' value='Code'/></p>
-        <p><input type='text' id="codedData"/> coded data</p>
+        <p><input type='text' id="codedData"/> coded data</p>// 
         <p><input type='button' onclick='decode()' value='Decode'/></p>
         <p><input type='text' id="decodedData"/> decoded data</p>
 
